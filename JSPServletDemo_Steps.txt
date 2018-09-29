@@ -1,0 +1,41 @@
+Sample JSP Servlet Demo
+
+Step 1: Create a Maven Project, select new-maven project
+Step 2: Click next, and then choose maven-archetype-webapp in the select and archetype window
+Step 3: Give Group Id (which is user defined) and then artifact id (which is project id) and then click finish.
+Step 4: Right Click the project, select properties-> Targeted Runtimes and select the wildfly 13.0 server and click apply and close.
+Step 5: Open src folder and then right click on main folder-> select new and choose a folder and name it as java.
+Step 6: Inside src->main->webpages, we can find the default jsp file created along with the project called index.jsp.
+Step 7: Open index.jsp and add the below code
+<html>
+<body>
+<h2>Hello World!</h2>
+<form action="HC" method="get">
+
+<input type="text" name="t1"/>
+<input type="submit" value="Click Here"/>
+
+</form>
+</body>
+</html>
+
+Step 8: Create a servlet inside src/main/java path in your application
+Step 9: Right click src/main/java and select new-> servlet.
+Step 10: Give the package name as controller and class name as HomeController and change the URL mapping in the next window to HC.
+Step 11: Write the code below inside HomeController.java
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String s1 = request.getParameter("t1");
+		PrintWriter pw = response.getWriter();
+		pw.println(s1);
+	}
+Step 12: Start the server in Debug mode. Right click the server in server tab and choose debug.
+Step 13: Right click the project and choose debug -> debug on server. Select server name and click finish/run.
+Step 14: When ever we make a change to the code, we have to right the application which is inside the server and do a full publish.
+Step 15: Right click the project and choose debug -> debug on server
+
+
+
+
+
+	

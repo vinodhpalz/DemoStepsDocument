@@ -1,0 +1,43 @@
+Step 1: Create a user in GitHub.com and Login
+Step 2: Create a new repository by clicking the plus icon on the top right corner
+Step 3: Give a name to the repository. Let the name be same as your project name and click create Repository.
+Step 4: Copy the repository URL from GitHub. example of the URL:
+https://github.com/vinodhpalz/DemoSpringProject.git
+
+Step 5: Open the eclipse, and in the right corner, click the icon which says open prespective and open the Git prespective from it.
+
+Step 6: In the Git Repositories tab, click the icon which says clone repository, and pass the repository name, host name, and also username and password of the GitHub. and then click next and finish.
+
+Step 7: Change the prespective back to Java EE by clicking the Java EE icon from the right corner if eclipse.
+
+Step 8: Right click the project and select Team-> Share Project.
+
+Step 9: In share Project window, choose the repository which we created and click finish.
+
+Step 10: Right Click the project and select Team-> Commit
+
+Step 11: In Git Commit Window, Move all the files from unstaged to staged by dragging and dropping it.
+
+Step 12: First time, when you commit, select commit and push option, click next in the window and pass username and password and click finish and again pass username and password to upload the code in GitHub.
+
+Step 13: Open the GitHub portal and click refresh to see your code in the URL.
+
+please find my project in the below URL
+
+https://github.com/vinodhpalz/DemoSpringProject
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

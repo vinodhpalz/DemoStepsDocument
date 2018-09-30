@@ -1,0 +1,415 @@
+Step 1: Create a maven quickstart project - we have created it and named it as FirstHibernate
+
+Step 2: Add Hibernate dependencies (Include Hibernate framework into your project) inside pom.xml (project object model) - pom.xml will act as an input info for maven
+
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.3.6.Final</version>
+</dependency>
+<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.0.12.Final</version>
+</dependency>
+
+Step 3: Add H2 database dependencies.
+
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <version>1.4.197</version>
+</dependency>
+
+Step 4: Add a folder named java inside src/main folder (It is applicable if you dont see that folder).
+
+Step 5: create Hibernate.cfg.xml inside src/main/java folder and this file will contain configuration information about Hibernate & H2 database.
+
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-configuration>
+<session-factory>
+<property name="hbm2ddl.auto">create</property>
+<property name="hiberate.dialect">org.hibernate.dialect.H2Dialect</property>
+<property name="hibernate.connection.driver_class">org.h2.Driver</property>
+<property name="hibernate.connection.url">jdbc:h2:tcp://localhost/~/BackEndDB</property>
+<property name="hibernate.connection.username">sa</property>
+<property name="hibernate.connection.password">sql@123</property>
+<property name="show_sql">true</property>
+<property name="current_session_context_class">thread</property>
+</session-factory>
+</hibernate-configuration>
+
+Step 6: create a Database in H2 and name it as SimpleHB and define the username and password for the same
+
+Step 7: Create an Entity class called Product and place it inside model package inside src/main/java folder.
+
+package model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="ProductDetails")
+public class Product {
+		
+		@Id
+		@GeneratedValue(strategy=GenerationType.IDENTITY)
+		@Column(name="productID")
+		private int pId;
+		@Column(name="productName")
+		private String pName;
+		@Column(name="productCost")
+		private int pCost;
+	
+		public Product()
+		{
+		
+		}
+	
+		public Product(String pName, int pCost) {
+			this.pName = pName;
+			this.pCost = pCost;
+		}
+
+		public int getpId() {
+			return pId;
+		}
+		public void setpId(int pId) {
+			this.pId = pId;
+		}
+		public String getpName() {
+			return pName;
+		}
+		public void setpName(String pName) {
+			this.pName = pName;
+		}
+		public int getpCost() {
+			return pCost;
+		}
+		public void setpCost(int pCost) {
+			this.pCost = pCost;
+		}	
+}
+
+Step 8: build a DBConfig class inside model package which contains configuration object, sessionfactory object and session object.
+
+package model;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class DBConfig {
+
+	private Configuration cfg;
+	private SessionFactory sf;
+	private Session sess;
+	
+	public DBConfig()
+	{
+		cfg = new Configuration();
+		sf = cfg.configure("Hibernate.cfg.xml").addAnnotatedClass(Product.class).buildSessionFactory();
+	}
+	public Session getSess()
+	{
+		sess = sf.getCurrentSession();
+		return sess;
+	}
+}
+
+
+Step 9: create ProductDAO Class in the model package which will contain the CRUD operations based on the entity class.
+
+package model;
+
+import org.hibernate.Session;
+
+public class ProductDAO {
+
+	private DBConfig db;
+	private Session sess;
+	public ProductDAO()
+	{
+		db = new DBConfig();
+	}
+	
+	public void insertProduct(Product p)
+	{
+		try
+		{
+			sess = db.getSess();
+			sess.beginTransaction();
+			sess.save(p);
+			sess.getTransaction().commit();
+			
+		}catch(Exception ex)
+		{
+			sess.getTransaction().rollback();
+			ex.printStackTrace();
+		}
+	}	
+}
+Step 10:Delete the app.java file from your project which contains the main method.
+
+Step 11: Ensure all your code is handled using try and catch block.
+
+Step 12: We are going to generate .jar file for your hibernate project.
+	 a. Rightclick the project, and choose Run As->maven build...
+	 b. In the Goals field-> Type compile and then click run.
+	 c. Rightclick the project, and choose Run As->maven build...
+	 d. In the Goals field-> Type test and then click run.
+	 e. Rightclick the project, and choose Run As->maven build...
+	 f. In the Goals field-> Type test-compile and then click run.
+	 g. Rightclick the project, and choose Run As->maven build...
+	 h. In the Goals field-> Type install and then click run.
+
+Note: please restart the eclipse, if you get a build failure message when you execute the first 2 steps.
+
+Step 13: hibernate project .jar file is created and you can see the path of the file generated in your console window of eclipse.
+
+----------------------------------------------------------------------------
+
+Spring Project - Front End Project
+-----------------------------------
+
+Step 1: Create a maven project and choose the maven web project archetype and give the group id and artifact id for your project.
+
+Step 2: Add the web server to the project - right click the project and select properties -> select targeted runtimes and choose the server and click ok.
+
+Step 3: Add a folder named "java" inside the folder src->main. Delete index.jsp file from your project which is inside src->main->webapp.
+
+step 4: Add the spring framework into the project by adding its dependencies inside pom.xml
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>5.0.8.RELEASE</version>
+</dependency>  
+    
+    <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-web</artifactId>
+    <version>5.0.8.RELEASE</version>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-webmvc</artifactId>
+    <version>5.0.8.RELEASE</version>
+</dependency>
+
+step 5: create a file named spring-config.xml, root-context.xml, web.xml inside the path src/main/webapp/WEB-INF
+
+spring-config.xml
+-----------------
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	
+	
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="controller" />
+	
+</beans:beans>
+
+root-context.xml
+----------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		
+</beans>
+
+web.xml
+-------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/root-context.xml</param-value>
+	</context-param>
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-config.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>
+
+Step 6: 
+
+create a folder called as "views" inside the webapp folder which is inside the src->main folder. This is required to add all the .jsp files while working with spring framework.
+
+Step 7: 
+Create 2 views (.jsp) inside the views folder. Name the view as product.jsp and success.jsp. right click the views folder and create the jsp files.
+
+Step 8: 
+
+create a package called controller and add a controller class into it.
+a. Rightclick the src/main/java folder, click new and select a class.
+b. In the create class window, give the package name as controller and give the class name as ProductController and click finish.
+
+Step 9:
+
+copy the dependency of your backend project from pom.xml file of your backend project and place it into the pom.xml file of frontend project.
+
+<dependency>
+     <groupId>com.vinodh</groupId>
+  <artifactId>BackEndProject</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+</dependency>
+
+Step 10:
+
+place the below code inside ProductController:
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import model.Product;
+
+@Controller
+public class ProductController {
+
+	@RequestMapping(value="/",method=RequestMethod.GET)
+	public String productsPage() {
+		return "product";
+	}
+	
+	@RequestMapping(value="/success", method=RequestMethod.POST)
+	public String productSuccess(@ModelAttribute("product1")Product p)
+	{
+		ProductDAO pd = new ProductDAO();
+		pd.insertProduct(p);
+		return "success";
+	}
+}
+
+Step 11: Add the below code in success.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>${product1.getpName()} Inserted Successfully </h1>
+</body>
+</html>
+
+Step 12: Right click the project and choose debug-> debug on server, if it is first time. If you have already deployed the project into the server, then you have to right the project which is inside the server and do a full publish and again choose debug-> debug on server.
+
+
+The data has to be inserted into the table successfully, check the DB for the table creation and data insertion.
+
+Step 13: After first time, change the hibernate property to update instead of create and perform step 11.
+
+Note: please open the H2 database and login to your db before starting the spring coding steps.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

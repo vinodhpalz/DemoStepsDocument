@@ -1,0 +1,81 @@
+Spring Security
+---------------
+
+Step 1: In FrontEndProject, add spring security dependencies inside pom.xml file.
+
+		<dependency>
+    		<groupId>org.springframework.security</groupId>
+    		<artifactId>spring-security-core</artifactId>
+    		<version>5.0.8.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.springframework.security</groupId>
+    		<artifactId>spring-security-web</artifactId>
+    		<version>5.0.8.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.springframework.security</groupId>
+    		<artifactId>spring-security-config</artifactId>
+    		<version>5.0.8.RELEASE</version>
+		</dependency>
+
+Step 2: We need to create a spring-security.xml file inside WEB-INF Folder
+and add the below code
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+		xmlns:beans="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security.xsd">
+		
+		
+		<http>
+		<intercept-url pattern="/productpage*" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')" />
+		<http-basic></http-basic>
+		</http>
+		
+		<authentication-manager>
+			<authentication-provider>
+			<password-encoder hash="bcrypt" />
+				<user-service>
+					<user name="vinodh" password="$2a$10$ulqcGeb2jdgy55ZdyVIWW.yq0eYNICs4JTVVc7/a/9vHGx8Ss8DfO" authorities="ROLE_USER" />
+					<user name="Ajay" password="$2a$10$uNWc63VVDhbjRHeQ1ZjvvOVn6acnw2FM1YTpQ9hN6nhK0GVDbJKZC" authorities="ROLE_ADMIN" />
+				</user-service>
+			</authentication-provider>
+		</authentication-manager>
+		
+		
+		</beans:beans>
+
+
+Step 3: load the spring-security.xml by adding it in web.xml file
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/root-context.xml,
+			/WEB-INF/spring-security.xml
+		</param-value>
+	</context-param>
+
+Step 4: Add the filter inside the web.xml file to enable spring security
+
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	<filter-name>springSecurityFilterChain</filter-name>
+	<url-pattern>/*</url-pattern>	
+	</filter-mapping>
+
+ 
+Step 5: Run the application
+
+

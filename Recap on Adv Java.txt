@@ -1,0 +1,60 @@
+Recap - 
+
+HTML, JavaScript, CSS, JSP, Servlets, Maven, Bootstrap, Hibernate, spring, json, rest, ajax, spring security, junit, jquery datatable, wildfly server, eclipse, h2 database, sql queries.
+
+
+HTML - input, table, button, <a>.
+javascript - validations, basic logics, <script>
+CSS - styles to make your web page look better, <link>
+JSP - Java server pages - HTML + Java, JSTL
+Servlet - Controller - server side java class
+Maven - Build Tool - Add dependencies into your project and it is used to build your project and generate jar files for the same.
+BootStrap - Responsive design - carousel, jumbotron, inputgroup, nav bars, buttons, href, cards, etc.
+Hibernate - ORM - Object Relational Mapping Framework which is used for managing your objects as rows of table in a database.
+-> pom.xml - Hibernate-core, Hibernate-validator dependencies.
+-> Annotations - @Id, @GeneratedValue, @Entity, @Table, @Column, @OneToOne, @OneToMany, @ManyToOne, @ManyToMany, @Min, @Max, @Past, @Future, @NotBlank, @JoinColumn, @Autowired 
+
+@OneToOne - Product (pId - primary key, pName, pCost), ProductDetail (pdId, pFeatures, pDate, pId - Foreign Key)
+@OneToMany - Product (One), Customers (Many)
+-> Hibernate.cfg.xml
+-> Configuration Object to load hibernate.cfg.xml
+-> map the entity class to configuration object
+-> get the sessionfactory object
+-> using sessionfactory object -> create the session object for every user
+
+Spring - controller - handles and communicates with both Model and View.
+	@Controller, @RequestMapping, @RequestParam, @PathVariable, @ResponseBody, @ModelAttribute, @Valid, @RestController, @Autowired.
+	spring-config.xml - dispatcher servlet (Front Controller), View Resolver - identifies the view which needs to be sent as a response.
+Spring Security - Authentication and Authorization - spring-security.xml
+spring web flow - control the flow of the application
+rest - @RestController and by using ajax - access the data from one application to another application.
+json - javascript object notation - send and receive data in json format - key value format
+junit - junit testing framework to perform unit testing - assertEqual - Actual vs Expected
+Jquery datatable - to receive data and display it in a table format. 
+
+Next week (on or before 16th Dec)- DevOps session - 6hrs.
+23rd Dec - Project Code Review - Tech mentor from the center will do the complete project code review
+30th Dec - Project Submission and Evaluation
+6th Jan - Exam
+
+Exam - Objectives
+
+30-35 questions
+90-120 mins
+
+Java, Html, javascript, css, bootstrap, hibernate, maven, spring mvc, json, rest, spring security, junit, devops, jsp, servlet
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,68 @@
+Java - Core Java Concepts - Programming Language
+jdbc - Java database connectivity 
+h2 - Data base engine - SQL - Structure Query Language
+
+html - Designing the web page (UI - User Interface)
+css - Style to the web page (Cascading Style Sheet)
+jquery - Advanced Style and dynamic style of the web page
+javascript - client side validations and client side logics can be developed
+jsp - Designing the web page which can understand Java code written inside it
+servlet - Controller which will handle the request and response of the user
+
+Assessment 1 - Java and JDBC
+
+Project Development
+
+bootstrap - Advanced Styling - Responsive UI
+json - Data transfer mechanism
+spring mvc, spring security, spring workflow - Framework which can handle mvc, security, workflow.
+hibernate - ORM (Object Relation Mapping) Framework used for interacting with Database. 
+maven build tool - Build and deploy the web application in the web server
+Eclipse IDE - Tool  - Integrated Development Environment
+junit - Unit Testing Framework - Testing the code
+wildfly jboss web server/ apache tomcat web server - Web/ Application Server used for deploying and running the web application
+devops - Tool - Manage the life cycle of software development.
+
+Assessment 2 - All topics
+Project Evaluation - ECommerce Project
+
+
+Introduction to Java
+--------------------
+
+-> Android is built on top of Java
+-> Open Source Softwares and Technologies built using of Java
+-> Open Source became popular because of Java
+-> Today most of the technologies are Open Source, because of the impact created by Java
+-> Operating Systems became more powerful with the Java and Java related technologies
+-> Mobile apps, Web Apps, OS apps, Scientific, banking apps - Running which is built on Java
+
+Microsoft C#, C, C++; Apple is Swift, C, C++, Java; Python, Ruby, php  
+
+Open Source -> Source Code is Open to all
+platform indenpendent - Write once run any where - JVM (Java Virtual Machine).
+OOPS - Object Oriented Programming Structure/ System
+
+Object - Car, Bike, Dog - Identity, behaviour, attributes (state) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
